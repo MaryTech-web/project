@@ -1,0 +1,296 @@
+/* Import Google Font - Poppins (or any other modern, clean font) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Define some CSS variables for easy theme changes */
+    --primary-color: #4CAF50; /* A pleasant green */
+    --primary-dark: #388E3C;
+    --secondary-color: #007bff; /* Blue for contrast */
+    --accent-color: #FFC107; /* Yellow for highlights */
+    --text-color: #333;
+    --light-text-color: #666;
+    --bg-color: #eef2f6; /* Light grey-blue background */
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+    --completed-bg: #e0f2f1; /* Lighter green-grey for completed tasks */
+    --completed-text: #888;
+    --delete-button-bg: #dc3545;
+    --delete-button-hover: #c82333;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Use the imported font */
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    margin: 0;
+    padding: 20px; /* Add some padding for smaller screens */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    color: var(--text-color);
+}
+
+.container {
+    background-color: var(--card-bg);
+    padding: 40px; /* Increased padding */
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 10px 30px var(--shadow-medium); /* More prominent shadow */
+    width: 100%;
+    max-width: 550px; /* Wider container */
+    text-align: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Space between major sections */
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 15px; /* Adjust spacing */
+    font-size: 2.5em; /* Larger title */
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px; /* Slightly more space */
+    margin-bottom: 25px;
+    align-items: stretch; /* Ensure inputs and button align vertically */
+}
+
+#taskInput,
+.task-datetime-input {
+    flex-grow: 1;
+    padding: 14px 18px; /* More padding for a softer look */
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Slightly more rounded */
+    font-size: 1em; /* Consistent font size */
+    color: var(--text-color);
+    background-color: var(--bg-color); /* Light background for inputs */
+    transition: all 0.3s ease;
+    box-shadow: inset 0 1px 3px var(--shadow-light); /* Inner shadow */
+}
+
+#taskInput::placeholder,
+.task-datetime-input::placeholder {
+    color: var(--light-text-color);
+    opacity: 0.7;
+}
+
+#taskInput:focus,
+.task-datetime-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Focus ring effect */
+    background-color: var(--card-bg);
+}
+
+.task-datetime-input {
+    flex-shrink: 0;
+    width: auto; /* Allow content-based width */
+    min-width: 120px; /* Minimum width for date/time inputs */
+}
+
+#addTaskButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px 22px; /* Larger button */
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex-shrink: 0;
+    white-space: nowrap; /* Prevent text wrapping */
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+#addTaskButton:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+#addTaskButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+#taskList {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Remove default margin */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between list items */
+}
+
+#taskList li {
+    background-color: var(--card-bg);
+    padding: 15px 20px; /* Increased padding */
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* Stack text and meta vertically */
+    align-items: flex-start; /* Align contents to the start */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px var(--shadow-light);
+    transition: all 0.3s ease;
+}
+
+#taskList li.completed {
+    text-decoration: line-through;
+    color: var(--completed-text);
+    background-color: var(--completed-bg);
+    border-color: var(--completed-bg);
+    opacity: 0.8;
+}
+
+#taskList li .task-text {
+    flex-grow: 1;
+    text-align: left;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 8px; /* Space between text and meta */
+    cursor: pointer;
+    word-break: break-word; /* Handle long task names */
+    width: 100%; /* Ensure it takes full width */
+}
+
+.task-meta {
+    display: flex;
+    justify-content: space-between; /* Push date/time to left, delete to right */
+    align-items: center;
+    font-size: 0.85em;
+    color: var(--light-text-color);
+    width: 100%; /* Take full width of parent li */
+}
+
+.task-datetime {
+    flex-grow: 1; /* Allows it to take available space */
+    text-align: left;
+}
+
+#taskList li .delete-button {
+    background-color: var(--delete-button-bg);
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Smaller padding for delete button */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 15px; /* Space from date/time */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+#taskList li .delete-button:hover {
+    background-color: var(--delete-button-hover);
+    transform: translateY(-1px);
+}
+
+#taskList li .delete-button:active {
+    transform: translateY(0);
+}
+
+#clearCompletedButton {
+    background-color: #6c757d; /* Muted grey */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px; /* Space from task list */
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+#clearCompletedButton:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+#clearCompletedButton:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px var(--shadow-light);
+}
+
+/* Optional: Animation for alarm */
+@keyframes blink {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); background-color: var(--card-bg); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 193, 7, 0.4); background-color: #fff8e1; } /* Accent color glowing */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .container {
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px var(--shadow-medium);
+        margin: 10px; /* Keep container from touching edges */
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .input-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #taskInput,
+    .task-datetime-input,
+    #addTaskButton {
+        width: 100%;
+        margin-left: 0 !important; /* Override potential previous margin */
+    }
+
+    #addTaskButton {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+
+    #taskList li {
+        padding: 12px 15px;
+    }
+
+    #taskList li .task-text {
+        font-size: 1em;
+    }
+
+    .task-meta {
+        flex-direction: column; /* Stack date/time and delete vertically on smaller screens */
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    #taskList li .delete-button {
+        margin-left: 0;
+        margin-top: 8px; /* Space from date/time */
+        align-self: flex-end; /* Push button to the right */
+    }
+
+    #clearCompletedButton {
+        padding: 10px 18px;
+        font-size: 0.95em;
+    }
+}
+
+/* Even smaller screens */
+@media (max-width: 400px) {
+    .container {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+}
