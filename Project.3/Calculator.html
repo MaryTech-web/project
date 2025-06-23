@@ -1,0 +1,117 @@
+<!Doctype html>
+<hmtl lang="en">
+<head>
+  <meta chaarset="UTF-8">
+  <meta name ="viewport" content="width=device-width, intial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    .calculator {
+      width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  .display {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: right;
+    background-color: #f0f0f0;
+  }
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px
+}
+.button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #d0d0d0;
+}
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" class="display" disabled>
+
+    <div class="button-grid">
+      <button class="button" onclick="cleardisplay()"></button>
+      <button class="button" onclick="deleteChar()"></button>
+      <button class="button" onclick="appendOperator('/')">/</button>
+      <button class="button" onclick="appendOperator('*')">*</button>
+      <button class="button" onclick="appendDigit(7)">7</button>
+      <button class="button" onclick="appendDigit(8)">8</button>
+      <button class="button" onclick="appendDigit(9)">9</button>
+      <button class="button" onclick="appendOperator('-')">-</button>
+      <button class="button" onclick="appendDigit(4)">4</button>
+      <button class="button" onclick="appendDigit(5)">5</button>
+      <button class="button" onclick="appendDigit(6)">6</button>
+      <button class="button" onclick="appendOperator('+')">+</button>
+      <button class="button" onclick="appendDigit(1)">1</button>
+      <button class="button" onclick="appendDigit(2)">2</button>
+      <button class="button" onclick="appendDigit(3)">3</button>
+      <button class="button" onclick="calculatorResult()">=</button>
+      <button class="button" onclick="appendDigit(0)">0</button>
+      <button class="button" onclick="appendDecimal()">. </button>
+    </div>
+  </div>
+  <script>
+      let display = document.getElementById('display');
+      let currentInput = '';
+
+      function appendDigit(digit) {
+        currentInput += digit;
+        display.value = currentInput;
+      }
+
+      function appendOperator(operator) {
+        currentInput += operator;
+        display.value = currentInput;
+      }
+
+      function appendDecimal() {
+      if (!currentInput.include('.')) {
+        currentInput += '.';
+
+      }
+      function appendOperator(operator) {
+        currentInput += operator;
+        display.value = currentInput;
+        function appendOperator(operator) {
+          currentInput += operator;
+          display.value = currentInput;
+        }
+      }
+
+      function calculatorResult() {
+        try {
+            let result = eval(currentInput);
+            display.value = result;
+            currentInput = result.toString();
+        } catch (error) {
+          display.value = 'Error';
+          currentInput = '';
+        }
+      }
+      function clearDisplay() {
+        currentInput = '';
+        display.value = '';
+      }
+      function deleteChar() {
+        currentInput = currentInput.slice(0, -1);
+        display.value = currentInput;
+      }
+
+  </script>
+</body>
+</html>
